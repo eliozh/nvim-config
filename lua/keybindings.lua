@@ -7,6 +7,3 @@ map("i", "jk", "<Esc>", opt)
 -- terminal
 map("n", "<leader>t", ":sp | terminal<CR>", opt)
 
--- nvim-tree
-map("n", "<leader>fs", ":NvimTreeToggle<CR>", opt)
-
