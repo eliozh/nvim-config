@@ -31,6 +31,9 @@ local opts = {
 
 return {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "arkav/lualine-lsp-progress",
+    },
     opts = opts
 }

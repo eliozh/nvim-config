@@ -98,3 +98,5 @@ vim.opt.showmode = false
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- set clipboard
+vim.opt.clipboard = "unnamedplus"

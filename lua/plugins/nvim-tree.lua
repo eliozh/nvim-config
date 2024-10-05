@@ -15,16 +15,18 @@ local opts = {
     git = {
         enable = false,
     },
-    update_cwd = true,
+    update_cwd = false,
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     update_focused_file = {
         enable = true,
-        update_cwd = true,
+        update_root = true,
     },
     filters = {
         dotfiles = true,
     },
     view = {
-        width = 40,
+        width = 30,
         side = "left",
         number = false,
         relativenumber = false,
@@ -33,7 +35,7 @@ local opts = {
     actions = {
         open_file = {
             resize_window = true,
-            quit_on_open = true,
+            quit_on_open = false,
         },
     },
     on_attach = my_on_attach,
