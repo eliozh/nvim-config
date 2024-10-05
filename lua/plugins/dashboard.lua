@@ -27,14 +27,24 @@ local opts = {
         },
         center = {
             {
-                icon = "󰏓 ",
+                icon = "󰏓  ",
                 desc = "Projects                ",
                 action = "Telescope projects",
             },
             {
-                icon = " ",
+                icon = "  ",
                 desc = "Recent files            ",
                 action = "Telescope oldfiles",
+            },
+            {
+                icon = "  ",
+                desc = "Edit configuration      ",
+                action = "edit ~/.config/nvim/init.lua"
+            },
+            {
+                icon = "  ",
+                desc = "Edit projects           ",
+                action = "edit ~/AppData/Local/nvim-data/project_nvim/project_history",
             },
         },
         footer = {

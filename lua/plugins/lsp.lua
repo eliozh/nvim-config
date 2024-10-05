@@ -7,9 +7,9 @@ return {
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
-                    package_uninstalled = "✗"
-                }
-            }
+                    package_uninstalled = "✗",
+                },
+            },
         },
     },
 
@@ -21,12 +21,12 @@ return {
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
 
-            mason_lspconfig.setup {
-                ensure_installed = { "rust_analyzer", "clangd", "ast_grep", "harper_ls", "cmake", "lua_ls" },
-            }
-            require("mason-lspconfig").setup_handlers {
+            mason_lspconfig.setup({
+                ensure_installed = { "rust_analyzer" },
+            })
+            require("mason-lspconfig").setup_handlers({
                 function(server_name)
-                    require("lspconfig")[server_name].setup {
+                    require("lspconfig")[server_name].setup({
                         on_attach = function(client, bufnr)
                             local function buf_set_keymap(...)
                                 vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -48,16 +48,55 @@ return {
                             buf_set_keymap("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
                             buf_set_keymap("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
 
-                            vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async=false})')
+                            vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async=false})")
                         end,
-                    }
+                    })
                 end,
-            }
+            })
         end,
     },
 
     -- lsp client
     {
         "neovim/nvim-lspconfig",
+    },
+
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        config = function()
+            require("mason-tool-installer").setup({
+                ensure_installed = {},
+            })
+        end,
+    },
+
+    {
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "nvimtools/none-ls.nvim",
+        },
+        config = function()
+            require("mason").setup()
+            require("mason-null-ls").setup({
+                ensure_installed = {},
+            })
+
+            local null_ls = require("null-ls")
+            null_ls.setup({
+                sources = {
+                    null_ls.builtins.formatting.cbfmt,
+                },
+                on_attach = function(client, bufnr)
+                    local function buf_set_keymap(...)
+                        vim.api.nvim_buf_set_keymap(bufnr, ...)
+                    end
+                    local opt = { noremap = true, silent = true }
+                    buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opt)
+                    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async=false})")
+                end,
+            })
+        end,
     },
 }

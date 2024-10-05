@@ -23,7 +23,6 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftround = true
 
-
 -- shift width
 vim.opt.shiftwidth = 4
 
@@ -100,3 +99,6 @@ vim.g.maplocalleader = " "
 
 -- set clipboard
 vim.opt.clipboard = "unnamedplus"
+
+-- set default terminal
+vim.opt.shell = "pwsh.exe"
