@@ -8,6 +8,7 @@ vim.opt.sidescrolloff = 8
 
 -- show line number
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 -- highlight cursor line
 vim.opt.cursorline = true
@@ -102,3 +103,6 @@ vim.opt.clipboard = "unnamedplus"
 
 -- set default terminal
 vim.opt.shell = "pwsh.exe"
+
+-- enable file type plugin
+vim.cmd("filetype plugin on")
