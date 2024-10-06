@@ -8,9 +8,9 @@ local function init()
 end
 
 local function config()
-    require'nvim-treesitter.configs'.setup {
+    require 'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-        ensure_installed = { "c", "lua", "python", "rust", "toml", "json", "cmake" },
+        ensure_installed = { "c", "lua", "python", "rust", "toml", "json", "cmake", "cpp" },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
@@ -63,8 +63,15 @@ local function config()
 end
 
 return {
-    "nvim-treesitter/nvim-treesitter",
-    init = init,
-    config = config,
-    opts = opts,
+    {
+        "nvim-treesitter/nvim-treesitter",
+        init = init,
+        config = config,
+        opts = opts,
+    },
+    {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        config = function()
+        end,
+    },
 }

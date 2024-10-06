@@ -22,10 +22,12 @@ return {
             local mason_lspconfig = require("mason-lspconfig")
 
             mason_lspconfig.setup({
-                ensure_installed = { "rust_analyzer" },
+                ensure_installed = { "rust_analyzer", "lua_ls", "clangd" },
             })
             require("mason-lspconfig").setup_handlers({
                 function(server_name)
+                    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
                     require("lspconfig")[server_name].setup({
                         on_attach = function(client, bufnr)
                             local function buf_set_keymap(...)
@@ -45,11 +47,10 @@ return {
 
                             -- Diagnostic
                             buf_set_keymap("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
-                            buf_set_keymap("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
-                            buf_set_keymap("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
 
                             vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async=false})")
                         end,
+                        capabilities = capabilities,
                     })
                 end,
             })
@@ -80,7 +81,9 @@ return {
         config = function()
             require("mason").setup()
             require("mason-null-ls").setup({
-                ensure_installed = {},
+                ensure_installed = {
+                    "cbfmt",
+                },
             })
 
             local null_ls = require("null-ls")
