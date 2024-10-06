@@ -10,11 +10,6 @@ map("i", "jk", "<Esc>", opt("escape"))
 map("n", "<leader>vt", ":vsp | terminal<CR>", opt("vertical terminal"))
 map("n", "<leader>t", ":sp | terminal<CR>", opt("horizontal terminal"))
 map("t", "<Esc>", "<C-\\><C-n>", opt("Terminal escape"))
-map("t", "<leader>wh", "[[ <C-\\><C-n><C-w>h ]]", opt("move to left window"))
-map("t", "<leader>wj", "[[ <C-\\><C-n><C-w>j ]]", opt("move to down window"))
-map("t", "<leader>wk", "[[ <C-\\><C-n><C-w>k ]]", opt("move to up window"))
-map("t", "<leader>wl", "[[ <C-\\><C-n><C-w>l ]]", opt("move to right window"))
-
 
 -- window
 map("n", "<leader>wh", "<C-w>h", opt("move to left window"))
