@@ -1,35 +1,39 @@
 local map = vim.api.nvim_set_keymap
-local opt = { noremap = true, silent = true }
+local function opt(desc)
+    return { desc = desc, noremap = true, silent = true }
+end
 
 -- "jj" to escape from insert mode
-map("i", "jk", "<Esc>", opt)
+map("i", "jk", "<Esc>", opt("escape"))
 
 -- terminal
-map("n", "<leader>vt", ":vsp | terminal<CR>", opt)
-map("n", "<leader>t", ":sp | terminal<CR>", opt)
-map("t", "<Esc>", "<C-\\><C-n>", opt)
-map("t", "<A-h>", "[[ <C-\\><C-n><C-w>h ]]", opt)
-map("t", "<A-j>", "[[ <C-\\><C-n><C-w>j ]]", opt)
-map("t", "<A-k>", "[[ <C-\\><C-n><C-w>k ]]", opt)
-map("t", "<A-l>", "[[ <C-\\><C-n><C-w>l ]]", opt)
+map("n", "<leader>vt", ":vsp | terminal<CR>", opt("vertical terminal"))
+map("n", "<leader>t", ":sp | terminal<CR>", opt("horizontal terminal"))
+map("t", "<Esc>", "<C-\\><C-n>", opt("Terminal escape"))
+map("t", "<leader>wh", "[[ <C-\\><C-n><C-w>h ]]", opt("move to left window"))
+map("t", "<leader>wj", "[[ <C-\\><C-n><C-w>j ]]", opt("move to down window"))
+map("t", "<leader>wk", "[[ <C-\\><C-n><C-w>k ]]", opt("move to up window"))
+map("t", "<leader>wl", "[[ <C-\\><C-n><C-w>l ]]", opt("move to right window"))
 
 
 -- window
-map("n", "<A-h>", "<C-w>h", opt)
-map("n", "<A-j>", "<C-w>j", opt)
-map("n", "<A-k>", "<C-w>k", opt)
-map("n", "<A-l>", "<C-w>l", opt)
-map("n", "<leader>sc", "<C-w>c", opt)
-map("n", "<leader>so", "<C-w>o", opt)
-map("n", "<leader>sv", ":vsp<CR>", opt)
-map("n", "<leader>sh", ":sp<CR>", opt)
-map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
-map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
-map("n", "<C-Down>", ":resize +2<CR>", opt)
-map("n", "<C-Up>", ":resize -2<CR>", opt)
-map("n", "<leader>s=", "<C-w>=", opt)
+map("n", "<leader>wh", "<C-w>h", opt("move to left window"))
+map("n", "<leader>wj", "<C-w>j", opt("move to down window"))
+map("n", "<leader>wk", "<C-w>k", opt("move to up window"))
+map("n", "<leader>wl", "<C-w>l", opt("move to right window"))
+map("n", "<leader>wc", "<C-w>c", opt("close current window"))
+map("n", "<leader>wo", "<C-w>o", opt("close other windows"))
+map("n", "<leader>sv", ":vsp<CR>", opt("split window vertically"))
+map("n", "<leader>sh", ":sp<CR>", opt("split window horizontally"))
+map("n", "<C-Left>", ":vertical resize -2<CR>", opt("window height decrease"))
+map("n", "<C-Right>", ":vertical resize +2<CR>", opt("window height increase"))
+map("n", "<C-Down>", ":resize +2<CR>", opt("window width increase"))
+map("n", "<C-Up>", ":resize -2<CR>", opt("window height increase"))
+map("n", "<leader>s=", "<C-w>=", opt("balance window size"))
 
-map("v", "<", "<gv", opt)
-map("v", ">", ">gv", opt)
-map("v", "J", ":move '>+1<CR>gv-gv", opt)
-map("v", "K", ":move '<-2<CR>gv-gv", opt)
+map("v", "<", "<gv", opt("indent left shift"))
+map("v", ">", ">gv", opt("indent right shift"))
+map("v", "J", ":move '>+1<CR>gv-gv", opt("selection move down"))
+map("v", "K", ":move '<-2<CR>gv-gv", opt("selection move up"))
+
+map("n", "gb", "<C-t>", opt("restore cursor"))

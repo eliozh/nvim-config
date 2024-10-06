@@ -3,7 +3,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
 -- keep 8 line when moving cursor
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 999
 vim.opt.sidescrolloff = 8
 
 -- show line number

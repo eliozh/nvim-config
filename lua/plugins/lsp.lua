@@ -16,15 +16,20 @@ return {
     -- Bridge mason with lspconfig
     {
         "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
         opts = {},
         priority = 998,
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
 
+
             mason_lspconfig.setup({
                 ensure_installed = { "rust_analyzer", "lua_ls", "clangd" },
             })
-            require("mason-lspconfig").setup_handlers({
+
+            mason_lspconfig.setup_handlers({
                 function(server_name)
                     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -34,19 +39,22 @@ return {
                                 vim.api.nvim_buf_set_keymap(bufnr, ...)
                             end
 
-                            local opt = { noremap = true, silent = true }
+                            local function opt(desc)
+                                return { desc = "Lsp: " .. desc, noremap = true, silent = true }
+                            end
 
-                            buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
-                            buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
-                            buf_set_keymap("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
-                            buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
-                            buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
-                            buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-                            buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
-                            buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opt)
+                            buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt("rename"))
+                            buf_set_keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",
+                                opt("code action"))
+                            buf_set_keymap("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", opt("hover"))
+                            buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt("definition"))
+                            buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt("implementation"))
+                            buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt("declaration"))
+                            buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt("references"))
+                            buf_set_keymap("n", "<leader>ft", "<cmd>lua vim.lsp.buf.format({async=true})<CR>", opt("formatting"))
 
                             -- Diagnostic
-                            buf_set_keymap("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
+                            buf_set_keymap("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt("float"))
 
                             vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format({async=false})")
                         end,
@@ -55,11 +63,6 @@ return {
                 end,
             })
         end,
-    },
-
-    -- lsp client
-    {
-        "neovim/nvim-lspconfig",
     },
 
     {

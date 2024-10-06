@@ -16,13 +16,17 @@ local opts = {
 local function init()
     vim.opt.termguicolors = true
 
-    local opt = { noremap = true, silent = true }
     local map = vim.api.nvim_set_keymap
 
-    map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-    map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
-    map("n", "<C-w>", ":Bdelete!<CR>", opt)
-    map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
+    function opt(desc)
+        return { desc = "BufferLine: " .. desc, noremap = true, silent = true }
+    end
+
+    map("n", "<leader>bh", ":BufferLineCyclePrev<CR>", opt("cycle previous"))
+    map("n", "<leader>bl", ":BufferLineCycleNext<CR>", opt("cycle next"))
+    map("n", "<leader>bd", ":Bdelete!<CR>", opt("close current"))
+    map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt("pick close"))
+    map("n", "<leader>bo", ":BufferLineCloseOthers<CR>", opt("close others"))
 end
 
 return {

@@ -42,10 +42,12 @@ local opts = {
 }
 
 function init()
-    local opt = { noremap = true, silent = true }
     local map = vim.api.nvim_set_keymap
+    local function opt(desc)
+        return { desc = "nvim-tree: " .. desc, noremap = true, silent = true }
+    end
 
-    map("n", "<leader>fs", ":NvimTreeToggle<CR>", opt)
+    map("n", "<leader>fs", ":NvimTreeToggle<CR>", opt("toggle tree"))
 end
 
 return {
