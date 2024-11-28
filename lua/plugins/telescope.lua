@@ -1,5 +1,5 @@
 local opts = {
-    
+
 }
 
 local function init()
@@ -11,6 +11,7 @@ local function init()
 
     vim.keymap.set("n", "<leader>ff", builtin.find_files, opt("find files"))
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, opt("live grep"))
+    vim.keymap.set("n", "<leader>fo", builtin.oldfiles, opt("recent files"))
 end
 
 return {

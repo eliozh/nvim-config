@@ -22,8 +22,8 @@ local function init()
         return { desc = "BufferLine: " .. desc, noremap = true, silent = true }
     end
 
-    map("n", "<leader>bh", ":BufferLineCyclePrev<CR>", opt("cycle previous"))
-    map("n", "<leader>bl", ":BufferLineCycleNext<CR>", opt("cycle next"))
+    map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt("cycle previous buffer"))
+    map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt("cycle next buffer"))
     map("n", "<leader>bd", ":Bdelete!<CR>", opt("close current"))
     map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt("pick close"))
     map("n", "<leader>bo", ":BufferLineCloseOthers<CR>", opt("close others"))

@@ -72,6 +72,15 @@ return {
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
         config = function()
+            require("ts_context_commentstring").setup({
+                enable_autocmd = false,
+            })
         end,
+    },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        config = function()
+            require("rainbow-delimiters.setup").setup({})
+        end
     },
 }
